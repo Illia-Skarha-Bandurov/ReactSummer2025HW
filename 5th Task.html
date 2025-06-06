@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <title>React Приклад</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      function App() {
+        const [ log, setLog] = React.useState('')
+        const [ pass, setPass] = React.useState('')
+        const [ logResult, setLogResult] = React.useState('')
+        const loginDetails = [
+          { username: 'user1', password: 'pass1' },
+          { username: 'user2', password: 'pass2' },
+          { username: 'user3', password: 'pass3' },
+          { username: 'user4', password: 'pass4' },
+          { username: 'user5', password: 'pass5' }
+        ]
+
+        function logChangeHandler(e) {
+          setLog(e.target.value)
+        }
+
+        function passChangeHandler(e) {
+          setPass(e.target.value)
+        }
+
+        function autorisationControl(username, password) {
+          console.log('111')
+          const user = loginDetails.find(
+            (user) => user.username === log && user.password === pass
+          )
+          if (user) {
+            setLogResult(`Welcome, ${user.username}!`)
+          } else {
+            setLogResult(`Invalid login or password`)
+          }
+        }
+
+        return (
+          <div>
+            <div>
+              Login: <input value={log} onChange={logChangeHandler}/>
+            </div>
+            <div>
+              Password: <input value={pass} onChange={passChangeHandler}/>
+            </div>
+            <button onClick={autorisationControl}>Go</button>
+            <h2>{logResult}</h2>
+          </div>
+        )
+      }
+      const root = ReactDOM.createRoot(document.getElementById('root'))
+      root.render(<App />)
+    </script>
+  </body>
+</html>

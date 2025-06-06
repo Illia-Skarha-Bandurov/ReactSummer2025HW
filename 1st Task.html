@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Завдання 1</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      function App() {
+        const [pass, setPass] = React.useState(0)
+        const handleClear = () => {
+          setPass(0)
+        }
+
+        function bussesRequired() {
+          return  Math.ceil(pass / 20)         // Це, можливо не корректне рішення для першого заняття, але я повний новачок в програмуванні і мені було дуже цікаво знайти можливість реалізувати цю функцію саме з таким результатом. Я був би дуже вдячний якщо ви могли б порадити більш ефективний спосіб розрахунку у подібних випадках.
+        }
+
+        function waterRequired() {
+            return pass * 2                    // кожному пасажиру 2 пляшки
+        }
+
+        function sandwichesRequired() {
+            return pass * 3                    // кожному пасажиру 3 бутерброди
+        }
+
+        return (
+          <div>
+            <div>
+              <label>
+                Please enter the number of passengers:
+                <input
+                  type="number"
+                  min="0"
+                  value={pass}
+                  onChange={(e) => setPass(Number(e.target.value))}
+                />
+              </label>
+            </div>
+            <div>
+              Busses required: <span id="busses">{bussesRequired()}</span>{' '}
+            </div>
+            <div>
+              Water bottels required: <span id="water">{waterRequired()}</span>{' '}
+            </div>
+            <div>
+              Sandwiches required: <span id="sandwiches">{sandwichesRequired()}</span>{' '}
+            </div>
+            <button onClick={handleClear}>Clear</button>
+          </div>
+        )
+      }
+      const root = ReactDOM.createRoot(document.getElementById('root'))
+      root.render(<App />)
+    </script>
+  </body>
+</html>
