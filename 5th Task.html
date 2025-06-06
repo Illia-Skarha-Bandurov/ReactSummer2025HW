@@ -2,7 +2,7 @@
 <html lang="uk">
   <head>
     <meta charset="UTF-8" />
-    <title>React Приклад</title>
+    <title>Завдання 5</title>
     <script
       src="https://unpkg.com/react@18/umd/react.development.js"
       crossorigin
@@ -37,7 +37,7 @@
         }
 
         function autorisationControl(username, password) {
-          console.log('111')
+          //console.log('111')
           const user = loginDetails.find(
             (user) => user.username === log && user.password === pass
           )
@@ -58,6 +58,11 @@
             </div>
             <button onClick={autorisationControl}>Go</button>
             <h2>{logResult}</h2>
+            <hr/>
+            <label>
+              Usernames: user1, user2, user3, user4, user5<br/> 
+              Passwords: pass1, pass2, pass3, pass4, pass5<br/>
+            </label>
           </div>
         )
       }
