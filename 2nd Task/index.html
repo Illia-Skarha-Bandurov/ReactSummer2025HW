@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Завдання 2</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+      function App() {
+        const [month, setMonth] = React.useState(1)
+        const handleClear = () => {
+          setMonth(1)
+        }
+                const seasons = {
+          1: { season: "winter", clothing: "coat", image: "https://upload.wikimedia.org/wikipedia/commons/4/43/D%C3%BClmen%2C_Kirchspiel%2C_Bauerschaft_B%C3%B6rnste_--_2021_--_4406_%28bw%29.jpg" },
+          2: { season: "winter", clothing: "coat", image: "https://upload.wikimedia.org/wikipedia/commons/4/43/D%C3%BClmen%2C_Kirchspiel%2C_Bauerschaft_B%C3%B6rnste_--_2021_--_4406_%28bw%29.jpg" },
+          3: { season: "spring", clothing: "jacket", image: "https://upload.wikimedia.org/wikipedia/commons/8/86/Bois_Raquet%2C_in_the_High_Fens_%E2%80%93_Eifel_Nature_Park_%28DSCF6655%29.jpg" },
+          4: { season: "spring", clothing: "jacket", image: "https://upload.wikimedia.org/wikipedia/commons/8/86/Bois_Raquet%2C_in_the_High_Fens_%E2%80%93_Eifel_Nature_Park_%28DSCF6655%29.jpg" },
+          5: { season: "spring", clothing: "jacket", image: "https://upload.wikimedia.org/wikipedia/commons/8/86/Bois_Raquet%2C_in_the_High_Fens_%E2%80%93_Eifel_Nature_Park_%28DSCF6655%29.jpg" },
+          6: { season: "summer", clothing: "t-shirt", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/D%C3%BClmen%2C_Naturschutzgebiet_-Am_Enteborn-_--_2014_--_0202.jpg/960px-D%C3%BClmen%2C_Naturschutzgebiet_-Am_Enteborn-_--_2014_--_0202.jpg?20200306091458" },
+          7: { season: "summer", clothing: "t-shirt", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/D%C3%BClmen%2C_Naturschutzgebiet_-Am_Enteborn-_--_2014_--_0202.jpg/960px-D%C3%BClmen%2C_Naturschutzgebiet_-Am_Enteborn-_--_2014_--_0202.jpg?20200306091458" },
+          8: { season: "summer", clothing: "t-shirt", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/D%C3%BClmen%2C_Naturschutzgebiet_-Am_Enteborn-_--_2014_--_0202.jpg/960px-D%C3%BClmen%2C_Naturschutzgebiet_-Am_Enteborn-_--_2014_--_0202.jpg?20200306091458" },
+          9: { season: "autumn", clothing: "sweater", image: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Forest_%28195%29.jpg" },
+          10: { season: "autumn", clothing: "sweater", image: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Forest_%28195%29.jpg" },
+          11: { season: "autumn", clothing: "sweater", image: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Forest_%28195%29.jpg" },
+          12: { season: "winter", clothing: "coat", image: "https://upload.wikimedia.org/wikipedia/commons/4/43/D%C3%BClmen%2C_Kirchspiel%2C_Bauerschaft_B%C3%B6rnste_--_2021_--_4406_%28bw%29.jpg" }
+        } 
+        const rec = seasons[month]
+        return (
+          <div>
+            <div>
+              <label>
+                Please select month:
+                <input
+                  type="number"
+                  min="1"
+                  max="12"
+                  value={month}
+                  onChange={(e) => setMonth(Number(e.target.value))}
+                />
+              </label>
+            </div>
+            <div>
+              Current season: {rec.season}
+            </div>
+            <div>
+              Clothes recommended: {rec.clothing}
+            </div>
+            <div>
+              Expected weather in forest: <img style={{ width: '200px' }} src={rec.image} />
+            </div>
+            <button onClick={handleClear}>Refresh</button>
+          </div>
+        )
+      }
+      const root = ReactDOM.createRoot(document.getElementById('root'))
+      root.render(<App />)
+    </script>
+  </body>
+</html>

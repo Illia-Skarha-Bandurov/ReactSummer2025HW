@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Завдання 4</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      function App() {
+        const [balance, setBalance] = React.useState(0)
+        const [ammendAdd, setAmmendAdd] = React.useState(0)
+        const [ammendWithdrawal, setAmmendWithdrawal] = React.useState(0)
+        const [operationFee, setOperationFee] = React.useState(0)
+        const [operationColour, setOperationColour] = React.useState('black')
+
+        const data = {
+          USD: 0.024,
+          EUR: 0.021,
+          fee: 0.03
+        }
+        const balanceInUSD = (balance * data.USD).toFixed(2)
+        const balanceInEUR = (balance * data.EUR).toFixed(2)
+
+        function moneyToAdd() {
+          const futureBalance = balance + ammendAdd - (ammendAdd * data.fee)
+          setBalance(futureBalance) 
+          setOperationFee((ammendAdd * data.fee))
+          setAmmendAdd(0)
+          if (futureBalance < 100) { 
+            setOperationColour('red')
+          } else {
+            setOperationColour('green')
+          }
+          
+        }
+
+        function moneyToWithdraw() {
+          setBalance((prevBalance) => prevBalance - ammendWithdrawal - (ammendWithdrawal * data.fee))
+          setOperationFee((ammendWithdrawal * data.fee))
+          setAmmendWithdrawal(0)
+          setOperationColour('red')
+        }
+
+        function withdrawalCheck() {
+          if (ammendWithdrawal + (ammendWithdrawal * data.fee) > balance) {
+            alert('Insufficient funds, you are able to withdraw only ' + (balance - (balance * 0.03)).toFixed(2) + ' UAH')
+          } else {
+            moneyToWithdraw()
+          }
+        }
+
+        return (
+          <div>
+              <p>
+                Current Balance: <label style={{ color: operationColour }}> {balance.toFixed(2)} </label> UAH 
+              </p>
+              <div>
+                <label>Account replenishment: </label>
+                <input
+                    type="number"
+                    min="0"
+                    value={ammendAdd}
+                    onChange={(e) => setAmmendAdd(Number(e.target.value))}
+                  />
+                <button onClick={moneyToAdd}>Proceed</button>
+              </div>
+              <div>
+                <label>Account withdrawal: </label>
+                <input
+                    type="number"
+                    min="0"
+                    max={balance}
+                    value={ammendWithdrawal}
+                    onChange={(e) => setAmmendWithdrawal(Number(e.target.value))}
+                  />
+                <button onClick = {withdrawalCheck}>Proceed</button>
+              </div>
+              <div>
+                <p>Operation fee: {operationFee.toFixed(2)} UAH</p>
+                <p>Account Balance in USD: {balanceInUSD}</p>
+                <p>Account Balance in EUR: {balanceInEUR}</p>
+              </div>
+          </div>
+        )
+      }
+      const root = ReactDOM.createRoot(document.getElementById('root'))
+      root.render(<App />)
+    </script>
+  </body>
+</html>
